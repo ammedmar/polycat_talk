@@ -1,0 +1,17 @@
+*.aux
+*.bbl
+*.blg
+*.brf
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.vrb
+*.jpeg
+*.jpg
+*.png
+*aux/demo.tex
+legacy/

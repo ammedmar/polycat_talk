@@ -1,0 +1,47 @@
+\documentclass[10pt,t,aspectratio=43,handout]{beamer} % handout aspectratio=149,1610,32,54
+\usetheme{Heverlee}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz-cd,tikz}
+\usetikzlibrary{arrows}
+\usepackage{mathtools,mathbbol}
+\usepackage{subcaption}
+\input{aux/usualcmds}
+\input{aux/commands}
+
+%%% QUICK OPTIONS:
+% (A) Math font without serifs, enable line below to make math serif:
+    \usefonttheme[onlymath]{serif}
+
+% (B) Re-define primary colour by adjusting the RGB values
+%    \definecolor{pblue}{RGB}{0,87,183}
+    % Ukraine blue = 0,87,183
+    % default = 206,125,66
+
+% (C) Title page graphic (optional) --- this is not for the background image, see \usebackgroundtemplate to change that ---
+    %\titlegraphic{\includegraphics[height=2.7cm]{example_figure.pdf}}
+
+% (D) Add logo to bottom right-corner (optional)
+    \logo{\includegraphics[height=0.7cm]{aux/logo}\hspace{12pt}\vspace{-4pt}}
+
+% (E) Choose one (or none) of these lines to add footline bar on all frames
+    %\setbeamertemplate{footline}[infoline]  % author, title, insitute
+    %\setbeamertemplate{footline}[navigation] % dots swhowing progress
+    %\setbeamertemplate{footline}[navsym] % navigation symbols
+
+% (F) Widescreen 16:9 ratio
+    %\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.45,debug]{beamerposter}
+
+%%% TITLE PAGE INFO:
+
+\title{State sums and higher categories}
+\subtitle{ANR Strasbourg (i.e. the family)}
+\author[ammedmar]{Anibal M. Medina-Mardones}
+\institute{Universit\'e Sorbonne Paris Nord}
+\date{\today}
+
+\begin{document}
+	\input{sec/titlepage}
+	\input{sec/ukraine}
+	\input{sec/body}
+	\input{sec/lastpage}
+\end{document}
