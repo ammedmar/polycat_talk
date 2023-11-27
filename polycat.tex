@@ -1,4 +1,4 @@
-\documentclass[10pt,t,aspectratio=43,handout]{beamer} % handout aspectratio=149,1610,32,54
+\documentclass[10pt,t,aspectratio=43]{beamer} % handout aspectratio=149,1610,32,54
 \usetheme{Heverlee}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz-cd,tikz}
@@ -7,6 +7,7 @@
 \usepackage{subcaption}
 \input{aux/usualcmds}
 \input{aux/commands}
+\usepackage{tikz-3dplot}
 
 %%% QUICK OPTIONS:
 % (A) Math font without serifs, enable line below to make math serif:
@@ -21,7 +22,7 @@
     %\titlegraphic{\includegraphics[height=2.7cm]{example_figure.pdf}}
 
 % (D) Add logo to bottom right-corner (optional)
-    \logo{\includegraphics[height=0.7cm]{aux/logo}\hspace{12pt}\vspace{-4pt}}
+    \logo{\includegraphics[height=0.7cm]{aux/logo.eps}\hspace{12pt}\vspace{-4pt}}
 
 % (E) Choose one (or none) of these lines to add footline bar on all frames
     %\setbeamertemplate{footline}[infoline]  % author, title, insitute
@@ -33,10 +34,11 @@
 
 %%% TITLE PAGE INFO:
 
-\title{State sums and higher categories}
-\subtitle{ANR Strasbourg (i.e. the family)}
+\title{Framed Polytopes and Higher Categories}
+\subtitle{Geometry and Topology Seminar, Western University}
 \author[ammedmar]{Anibal M. Medina-Mardones}
-\institute{Universit\'e Sorbonne Paris Nord}
+%\subtitle{Anibal M. Medina-Mardones}
+\institute{Joint with Arnau Padrol \& Guillaume Laplante-Anfossi}
 \date{\today}
 
 \begin{document}

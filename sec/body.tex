@@ -1,310 +1,525 @@
-%!TEX root = ../tqft.tex
+%!TEX root = ../polycat.tex
 
-\begin{frame}[fragile]{Functorial field theories}
+\begin{frame}[fragile]{Polytopes}
 	\pause
-	Monoidal functors from $\Bord_d$ to $\Vect_\CC$.
+	A \colorit{polytope} $P$ is the convex closure of a finite number of points in $\R^n$.
+	\smallskip
+	\begin{center}
+		\includegraphics[scale=.15]{aux/random_polytope}
+	\end{center}
+
+	\vskip-10pt\pause
+	Its faces form a poset $\colorit{\faces(P)}$:
+	\[
+	F \leq G \qquad iff \qquad F \subseteq G.
+	\]
 
 	\pause\medskip
-	\colorit{Example:} For $d=2$, oriented theories are classified by commutative Frobenius algebras:
+
+	The \colorit{linear span} of $F \in \faces(P)$ is denoted $\colorit{\Lin F}$.
+\end{frame}
+
+\begin{frame}{Oriented polytopes}
+	\pause
+
+	Let $V$ be an $n$-dim'l vector space.
+
+	\medskip
+	Two ordered bases define the same \colorit{orientation} $\omega$ if they are related by a positive determinant $\lambda$:
+	\[
+	v_1 \wedge\dots\wedge v_n = \lambda \ w_1 \wedge\dots\wedge w_n
+	\]
+
+	\pause\medskip
+	An \colorit{oriented polytope} is:
+	 \begin{enumerate}
+	 	\item A polytope $P$ and
+	 	\item $\forall F \in \faces(P)$ an orientation $\omega_F$ of $\Lin F$.
+	 \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Frames}
+	\pause
+	A \colorit{frame} is an ordered basis $\set{v_i}$ of $\R^n$:
 	\begin{center}
-		\begin{tikzpicture}[scale=.5]
-			\draw (0,0) ellipse (2 and 1);
-			\node[scale=1] at (0,-1.5) {\text{Vector space}};
+		\begin{tikzpicture}
+			\draw[->] (2, 0) -- (3, 0) node[anchor=west]{$v_1$};
+			\draw[->] (2, 0) -- (2.5, 1) node[anchor=west]{$v_2$};
 		\end{tikzpicture}
-		\begin{tikzpicture}[scale=.5]
-			\draw (0,-.5) arc (0:-180: 1  and 0.5);
-			\draw (0,-.5) arc (0:180: 1 and 0.5);
-			\draw[dashed,color=gray] (-2,4) arc (0:-180: 1  and 0.5);
-			\draw (-2,4) arc (0:180: 1 and 0.5);
-			\draw[dashed,color=gray] (2,4) arc (0:-180: 1  and 0.5);
-			\draw (2,4) arc (0:180: 1 and 0.5);
+	\end{center}
 
-			\draw  (-2,-.5) to [out=90, in=-90] (-4,4);
-			\draw  (0,-.5) to [out=90, in=-90] (2,4);
-			\draw  (-2,4) to [out=-90, in=-90] (0,4);
+	\pause
+	It defines a filtration: \quad $0 = V_0 \leq V_1 \leq\dots\leq V_n = \R^n$
+	\[
+	V_k = \Span{(v_1,\ldots,v_k)}
+	\]
+%	\[
+%	V_0 \leq V_1 \leq\dots\leq V_n = \R^n
+%	\]
 
-			\node[scale=1] at (-1,-1.5) {\text{product}};
+	\pause\medskip
+	Its \colorit{system of projections} is the collection
+	\[
+	\set{\pi_k \colon \R^n \to V_k}
+	\quad ; \quad
+	\pi_k(v_i) =
+	\begin{cases}
+		v_i & i \leq k,\\
+		\hfil 0 & k > i.
+	\end{cases}
+	\]
+\end{frame}
+
+\begin{frame}[fragile]{Framed polytopes}
+	\pause
+	A frame is said to be \colorit{$P$-admissible} if
+	\[
+	\forall F \in \faces(P),\ \pi_{\dim F}(\Lin F) = V_{\dim F}.
+	\]
+	We denote its inverse by $\sigma_F$.
+
+	\medskip
+	\colorit{Example}
+	\begin{center}
+		\begin{tikzpicture}
+			% Draw edges
+			\draw (.3,.2) -- (.9,.5) -- (1.2,1.3) -- cycle;
+
+			% Draw axes
+			\draw[->] (-0.5,0) -- (1.5,0) node[right] {$e_1$};
+			\draw[->] (0,-0.5) -- (0,1.2) node[above] {$e_2$};
+
+			\node at (.7,-.7){Yes};
 		\end{tikzpicture}
-		\begin{tikzpicture}[scale=.5]
-			\draw (0,.5) arc (0:180: 1  and 0.5);
-			\draw (0,.5) arc (0:-180: 1 and 0.5);
-			\draw[dashed,color=gray] (-2,-4) arc (0:180: 1  and 0.5);
-			\draw (-2,-4) arc (0:-180: 1 and 0.5);
-			\draw[dashed,color=gray] (2,-4) arc (0:180: 1  and 0.5);
-			\draw (2,-4) arc (0:-180: 1 and 0.5);
+		\qquad\qquad
+		\begin{tikzpicture}
+			% Draw edges
+			\draw (.3,.2) -- (1.2,.5) -- (1.2,1.3) -- cycle;
 
-			\draw  (-2,.5) to [out=-90, in=90] (-4,-4);
-			\draw  (0,.5) to [out=-90, in=90] (2,-4);
-			\draw  (-2,-4) to [out=90, in=90] (0,-4);
+			% Draw axes
+			\draw[->] (-0.5,0) -- (1.5,0) node[right] {$e_1$};
+			\draw[->] (0,-0.5) -- (0,1.2) node[above] {$e_2$};
 
-			\node[scale=1] at (-1,-5) {\text{coproduct}};
+			\node at (.7,-.7){\;No};
 		\end{tikzpicture}
 	\end{center}
 
-	\pause
-	\colorit{Partition function:} To a closed top-dimensional manifold $M$ it assigns the number defining the morphism $\CC \to \CC$ defined by $M$.
-\end{frame}
-
-\begin{frame}[fragile]{State sum}
-	\pause
-	\colorit{Example:}
-	Dijkgraaf--Witten invariant of a closed oriented 2-d manifold $M$.
-
 	\pause\medskip
-	Finite group $G$ with a $\rU(1)$-valued 2-cocycle $\omega$.
-
-	\pause\smallskip
-	States: $\set{\text{edges} \to G \mid \text{product of edges of a face is } 1}$
-
-	\pause\medskip
-	\colorit{Invariant:}
-	\[
-	Z(M) = \text{coeff} \
-	\sum_{\substack{\text{states} \\ \phi}} \
-	\prod_{\substack{\text{faces} \\ [012]}}
-	\omega(\phi[01], \phi[12])^{\epsilon}
-	\]
-	where $\epsilon$ is $1$ or $-1$ based on the orientation.
-
-	\pause\bigskip
-	The group algebra $\CC[G]$ can be made into a Frobenius algebra using $\omega$ such that the associated field theory recovers $Z$ as its partition function.
-
-	\pause\bigskip
-	\colorit{Goal:} To keep the categorical nature \colorit{and} the local character of these two approaches.
-\end{frame}
-
-\begin{frame}{Street orientals}
-	\pause
-	The free $\omega$-categories generated by simplices.
-
-	\begin{center}
-		\includegraphics[scale=.25]{aux/street}
-	\end{center}
-\end{frame}
-
-\begin{frame}{From simplicial sets to $\omega$-categories}
-	\pause
-	They form a cosimplicial $\omega$-category, and for any simplicial set $X$, let
-	\[
-	\cO(X) \defeq \colim_{\simplex^n \downarrow X} \cO_n
-	\]
-
-	\pause\bigskip
-	The nerve of an $\omega$-category is defined, as usual, by the expression
-	\[
-	\rN(\cC)_k \defeq \omega\Cat(\cO_k, \cC).
-	\]
-
-	\pause\bigskip
-	Analogous to the geometric realization and singular complex constructions.
-\end{frame}
-
-\begin{frame}[fragile]{State sum data}
-	\pause
-	Let $M$ be triangulated by $X$.
-	To define a natural $\omega$-category morphism from $\cO(X)$ to some $\cC$, it suffices to define a cone under $\cO_\bullet$ with vertex $\cC$.
-	\[
-	\begin{tikzcd}
-		\cO_0 \arrow[dr, bend right] \arrow[r,shift left=1] \arrow[r,shift right=1] &
-		\cO_1 \dar \arrow[r,shift left=2] \arrow[r,shift right=2] \rar &
-		\cO_2 \arrow[dl, bend left] \arrow[r,shift left=1] \arrow[r,shift right=1] \arrow[r,shift left=3] \arrow[r,shift right=3] & \cdots \\
-		& \cC & \arrow[l,"\vdots"',pos=0.1, in=-20, out=200] &
-	\end{tikzcd}
-	\]
-
-	\pause\medskip
-	We refer to this as \colorit{state sum $\cC$-data}.
-
-	\pause\medskip
-	If $M$ is closed $n$-manifold and $\cC$ is sufficiently ``dualizable", the partition function of $M$  is the morphism in $\cC$ obtained by evaluating the fundamental cycle of $M$.
-
-	\pause\medskip
-	If $\cC$ is ``pointed" this morphism is identified with a complex number.
-
-	\pause\medskip
-	We will study the oriented case in more detail.
-\end{frame}
-
-\begin{frame}{Oriented case}
-	\pause
-	If we are interested in $n$-manifolds, we enhance the Street diagram with $n$-orientations by including both $\cO_n$ and $\cO_n^\op$.
-
-	\begin{center}
-		\includegraphics[scale=.05]{aux/two_triangles}
-	\end{center}
-
-	\pause
-	If $M = \bars{X}$ is an oriented and triangulated manifold, we define $\cO_X(M)$ as before but $\cO_n$ or $\cO_n^\op$ depending if the canonical orientation of the simplex agrees with the induced from $M$.
-
-	\begin{center}
-		\includegraphics[scale=.05]{aux/composition}
-	\end{center}
-\end{frame}
-
-\begin{frame}[fragile]{$B\Vect$}
-	Let us consider the 2-category with one object, 1-morphisms given by $\Vect$ and composition by tensor product, and 2-morphisms given by linear maps.
-
-	\pause\medskip
-	A cone under
-		\[
-	\begin{tikzcd}[row sep=3]
-		& & \cO_2 \\
-		\cO_0 \arrow[r,shift left=1] \arrow[r,shift right=1] &
-		\cO_1 \arrow[ru,shift left=2] \arrow[ru,shift right=2] \urar
-		\arrow[rd,shift left=2] \arrow[rd,shift right=2] \drar & \\
-		& & \cO_2^\op
-	\end{tikzcd}
-	\]
-	with target $B\Vect$ is determined by a vector space $V$ with a product $\cdot$ and a coproduct $\Delta$.
-
-	\pause\medskip
-	\colorit{Question:} What about $\cO_3$?
-\end{frame}
-
-\begin{frame}{Relations}
-	\pause
-	Considering the multiple 2-oriented versions of $\cO_3$ we obtain a list of relations satisfied by $(V, \cdot, \Delta)$.
-	\pause
-	For example
-	\begin{center}
-		\includegraphics[scale=.06]{aux/frob_relation}
-	\end{center}
-
-	\pause
-	\colorit{Observation 1.} These are satisfied if $(V, \cdot, \Delta)$ is a separable symmetric Frobenius algebra, which classify extended 2d-TQFT's.
-
-	\pause\medskip
-	\colorit{Observation 2.} These relations also imply the Pachner moves, so triangulation invariance.
-\end{frame}
-
-\begin{frame}{Towards the framed case}
-	\pause
-	There is a hierarchy of tangential structures to consider, the extreme cases are unoriented and framed.
-
-	\pause\smallskip
-	Let us consider a triangulated torus with the canonical framing
-	\begin{center}
-		\includegraphics[scale=.05]{aux/torus}
-	\end{center}
-
-	\pause\smallskip
-	If in general position, the frame defines a 2-cat struct. on each simplex
-	\begin{center}
-		\includegraphics[scale=.03]{aux/framed_triangle}
-	\end{center}
-\end{frame}
-
-\begin{frame}{Orientals after Kapranov Voevodsky}
-	\pause
-	Lets consider the convex closure of $n+1$ distinct points in the curve
-	\begin{align*}
-		\R &\to \R^{n} \\
-		t &\mapsto (t,t^2,\dots,t^n)
-	\end{align*}
-
-	\pause
-	The source and target of a $k$-face is obtained by projecting the last $n-k+1$ coordinates away and extremizing $e_k$ forward and backward
-	\begin{center}
-		\includegraphics[scale=.03]{aux/source_target}
-	\end{center}
-
-	\pause
-	\colorit{Theorem(K-V).} These correspond to those constructed by Street.
-
-	\pause\medskip
-	\colorit{Question:} What about other frames?
-\end{frame}
-
-\begin{frame}[fragile]{Pasting schemes}
-	\pause
-	We quote Kapranov-Voevodsky:
-	\begin{center}
-		\includegraphics[scale=.23]{aux/kv}
-	\end{center}
-
-	\pause
-	It cannot have loops
-	\[
-	\begin{tikzcd}
-		\bullet \rar & \bullet \dar \\
-		\bullet \uar & \bullet \lar
-	\end{tikzcd}
-	\]
-\end{frame}
-
-\begin{frame}[fragile]{Counterexample}
-	\pause
-	\colorit{Conjecture/claim (Kapranov-Voevodsky):} Any orthogonal frame in general position with respect to polytope $P$ defines via the previous construction a pasting scheme structure on it.
-
-	\pause\bigskip
-	\colorit{Construction (Laplante-M-Padrol)} An open family of frames in the $5$-simplex inducing a 2-loop.
-	\[
-	\begin{tikzpicture}[auto, node distance=2cm, >=latex',
-		point/.style = {draw, circle, fill = black, inner sep = 1pt}]
-
-		\coordinate (a) at (-3,-1);
-		\coordinate (b) at (-2,1);
-		\coordinate (c) at (-1,0);
-		\coordinate (d) at (1,0);
-		\coordinate (e) at (2,1);
-		\coordinate (f) at (3,-1);
-
-		\draw[thick] (c) -- (f) -- (b) -- (d);
-		\draw[line width = 3pt,white] (d) -- (a) -- (e) -- (c);
-		\draw[thick] (d) -- (a) -- (e) -- (c);
-		\draw[thick] (a) -- (b) -- (c) -- (a);
-		\draw[thick] (d) -- (e) -- (f) -- (d);
-
-		\foreach \i in {a,b,...,f}
-		{
-			\node[point,label={above:$\i$}] at (\i) {};
-		}
-
-		\draw[->] (4,-1)-- (4,0);
-		\draw[->] (4,-1)-- (5,-1);
-		\node[] at (5.5, -1) {$e_1$};
-		\node[] at (4.5, 0) {$e_2$};
-	\end{tikzpicture}
-	\]
-
-	\pause
-	\colorit{Construction (L-M-P)} A polytope where each frame induces a loop.
-\end{frame}
-
-\begin{frame}[fragile]{Toward the derived case}
-	\pause
-	My favorite definition of an $A_\infty$-algebra:
-
-	\pause
-	\[
-	\begin{tikzcd}
-		\cO_0 \arrow[dr, bend right] \arrow[r,shift left=1] \arrow[r,shift right=1] &
-		\cO_1 \dar \arrow[r,shift left=2] \arrow[r,shift right=2] \rar &
-		\cO_2 \arrow[dl, bend left] \arrow[r,shift left=1] \arrow[r,shift right=1] \arrow[r,shift left=3] \arrow[r,shift right=3] & \cdots \\
-		& \rB\Ch & \arrow[l,"\vdots"',pos=0.1, in=-20, out=200] &
-	\end{tikzcd}
-	\]
-
-	\pause\bigskip
-	\colorit{Key idea:}
-	\[
-	\Omega^2 \cO_n \cong K_{n-2}.
-	\]
-
-	\pause\bigskip
-	2-orientations give rise to a notion of ``Frobenius$_\infty$"-algebra.
-
-\end{frame}
-
-\begin{frame}{Conclusions and vague sentences}
+	A \colorit{framed polytope} is
 	\begin{enumerate}
-		\pause\item Functorial and state sum constructions of TQFT can be bridged using Street orientals. (State sum data is a cone over variations of Street's diagram.)
-%		\pause\item This approach is conceptually novel and and explains combinatorially some of the structure that one finds in classification of TQFT.
-		\pause\item The frame variation, which is initial among TQFTs, is related to the convex-geometric definition of $\omega$-cat structures on polytopes.
-		(Kapranov--Voevodsky problem).
-		\pause\item The conjectural answer of this problem is false.
-		\pause\item Street orientals form a double desuspension of the Stasheff operad.
-		Its 2-oriented version defines Calabi-Yau algebras.
-		\pause\item (\colorit{Not} discussed today) Orientals and cup-$i$ products are combinatorially related, so one might hope for a connection between our functorial state sum viepoint and the classification of fermionic topological phases, done using cochains as fields with actions incorporating cup-$i$ products (Kapustin, Gaiotto, Thorngren, and others).
+		\item A polytope $P$ and
+		\item A $P$-admissible frame $\set{v_i}$.
 	\end{enumerate}
 \end{frame}
+
+\begin{frame}{Orientation from frame}
+	\pause
+	\colorit{Construction} A $P$-admissible frame $\{v_i\}$ determines an orientation of $P$\,:
+	\[
+	\forall F \in \faces(P), \ \omega_F = \sigma_F v_1 \wedge\dots\wedge \sigma_F v_{\dim F}.
+	\]
+
+	\pause\colorit{Questions}
+	\begin{enumerate}
+		\item What frames induce the same orientation?
+		\item What orientations come from frames?
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Frames over an orientation}
+	\pause
+	The \colorit{frame moduli} of an orientation $\omega$ of $P$ is the set $\mathcal{M}(\omega)$ of all $P$-admissible frames inducing $\omega$.
+
+	\pause
+	\begin{center}
+		\begin{tikzpicture}[scale=.7]
+		%axes
+		\draw[->] (2, -.3) -- (3, -.3) node[anchor=west]{$v_1$};
+		\draw[->,dashed] (2, -.3) -- (3, .7) node[anchor=west]{$v_1'$};
+		\draw[->] (2, -.3) -- (2, .7) node[anchor=south]{$v_2=v_2'$};
+
+		%vertices
+		\node (a) at (1, 0) {$\bullet$};
+		%\node at (1.3, 0) {$a$};
+
+		\node (b) at (0.5, 0.866) {$\bullet$};
+		%\node at (0.5, 1.2) {$b$};
+
+		\node (c) at (-0.5, 0.866) {$\bullet$};
+		%\node (c) at (-0.5, 1.2) {$c$};
+
+		\node (d) at (-1, 0) {$\bullet$};
+		%\node at (-1.3, 0) {$d$};
+
+		\node (e) at (-0.5, -0.866) {$\bullet$};
+		%\node at (-0.5, -1.2) {$e$};
+
+		\node (f) at (0.5, -0.866) {$\bullet$};
+		%\node at (0.5, -1.2) {$f$};
+
+		%upper dges
+		\draw[thick] (-0.5, 0.866)--(0.5, 0.866);
+		\draw[thick] (1, 0)--(0.5, 0.866);
+		\draw[thick] (-0.5, 0.866)--(-1, 0);
+
+		%lower edges
+		\draw[thick] (1,0)--(0.5, -0.866);
+		\draw[thick] (-0.5, -0.866)--(0.5, -0.866);
+		\draw[thick] (-0.5, -0.866)--(-1, 0) ;
+	\end{tikzpicture}
+	\end{center}
+
+	\pause\medskip
+	\alt<4>{\colorit{Question} How complicated can this moduli be?}{
+	A \colorit{semi-algebraic set} $S \subseteq \R^d$ is def'd by integral poly. eqs. and inequalities
+	\[
+	S = \set{\mathbf{x}\in\R^d \mid f_1(\mathbf{x})=0, \dots, f_k(\mathbf{x})=0, f_{k+1}(\mathbf{x})>0, \dots, f_r(\mathbf{x})>0}.
+	\]
+	}
+	\pause
+	An important relation $\sim_{\mathrm{st}}$ between them is \colorit{stable equivalence}.
+
+	\pause\bigskip
+	\colorit{Universality Theorem (AML)}
+	For any open semi-algebraic set $S$ there exist $n \in \N$ and an orientation $\omega$ of the $n$-simplex with $\cM(\omega) \sim_{\mathrm{st}} S$.
+\end{frame}
+
+\begin{frame}[fragile]{Pasting diagrams}
+	\pause
+
+	\colorit{Construction} The category $F(G)$ generated by a directed graph $G$.
+
+	\pause\medskip
+	\colorit{Roughly} $G$ is a \colorit{pasting diagram} if each morphism in $F(G)$ is uniquely expressible in diagramatical terms.
+	For example,
+	\[
+	\cdot \to \cdot \to \cdot \to \dots \to \cdot
+	\qquad\text{but not}\qquad
+	\begin{tikzcd}[column sep=9pt,row sep=9pt]
+		\arrow[d,<-] \arrow[r] \cdot & \arrow[d] \cdot \\
+		\arrow[r,,<-] \cdot & \cdot
+	\end{tikzcd}
+	\]
+
+	\pause
+	Similarly, in higher category theory, this is a pasting diagram
+	\medskip
+	\begin{center}
+		\input{sec/pasting}
+	\end{center}
+
+	\pause\smallskip
+	\colorit{Conjecture (Kapranov-Voevodsky)}
+
+	\smallskip
+	Every framed polytope defines a pasting diagram.
+\end{frame}
+
+\begin{frame}{Simplices as pasting diagrams (Street 1987)}
+	\pause
+	\begin{center}
+		\includegraphics[scale=.28]{aux/street}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Continued}
+	\vspace*{-10pt}
+	\begin{center}
+		\includegraphics[scale=.25]{aux/street2}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Digression (for homotopy theorist)}
+	\pause
+	Street's construction defines a functor
+	\[
+	\simplex \to \infty\Cat
+	\]
+	\pause
+	and, given that the target is cocomplete, also the nerve of higher cats
+	\[
+	\rN \colon \infty\Cat \to \sSet
+	\]
+	whose image is used to define weak $\infty$-cats (complicial sets).
+
+	\pause\bigskip
+	\colorit{Disclaimer} This will play no role today.
+
+	\pause\bigskip
+	Let us go back to the idea of Kapranov-Voevodsky.
+\end{frame}
+
+\begin{frame}{Sources and targets}
+	\pause
+	Let $P$ be framed by $\{v_i\}$ and $F \in \faces(P)$.
+
+	\medskip
+	For $k < \dim F$, the \colorit{$k$-boundary} $\bd^{(k)}(F)$ is the boundary of $\pi_{k+1}(F)$.
+
+	\pause\smallskip
+	It has a canonical splitting:
+	\[
+	\bd^{(k)}(F) = \colorit{\so_k(F)} \sqcup \colorit{\ta_k(F)}
+	\]
+	where these are defined using the normal
+	\[
+	\angles{\normal, v_{k+1}} < 0 \quad (\text{resp.} > 0).
+	\]
+
+	\pause\medskip
+	\colorit{Example} TBA2
+
+	\pause\bigskip
+	\colorit{Claim} The moduli of frames over these so/ta splittings is also universal.
+
+	\pause\bigskip
+	\colorit{Reason} Orientations double cover these so/ta splittings.
+\end{frame}
+
+\begin{frame}{Digression (for computational geometers)}
+	\pause
+	This double cover is analogous to that of chirotopes over oriented matroids.
+
+	\pause\medskip
+	For simplices, we constructed a bijection between:
+
+	\medskip
+	$\bullet$ \colorit{frame orientations} \& (uniform and acyclic) \colorit{realizable flag chirotopes}
+
+	\pause\medskip
+	$\bullet$ \colorit{so/ta splitting structures} \& (...) \colorit{flag oriented matroids}.
+
+	\pause\bigskip
+	\colorit{Disclaimer} This will play no role today.
+
+	\pause\medskip
+	Let us go back to the idea of Kapranov-Voevodsky, again.
+\end{frame}
+
+\begin{frame}{Strings and loops}
+	\pause
+	A \colorit{$k$-string} in $P$ is a tuple $(F_1,\dots,F_\ell)$ of faces with
+	\[
+	\ta_k(F_i) \cap \so_k(F_{i+1}) \neq \emptyset.
+	\]
+
+	\pause
+	\colorit{Claim} This intersection is always a single $k$-face.
+
+	\pause\medskip
+	\colorit{Example} TBA3
+
+	\pause\medskip
+	We say it is a \colorit{$k$-loop} if $F_i = F_j$ for some $i \neq j$.
+
+	\pause\medskip
+	\colorit{Claim}
+	There are no $0$-loops on any framed polytope.
+	\pause
+	\begin{enumerate}
+		\item We can replace the frame for an orthogonal one.
+		\item $\angles{-, v_1}$ is strictly increasing over the string.
+	\end{enumerate}
+
+	\pause\medskip
+	\colorit{Question} Are there $k$-loops?
+
+	\pause\medskip
+	\colorit{Theorem} A framed polytope defines a pasting diagram iff it is loop-free.
+
+	\pause\medskip
+	\colorit{Comment} We used Steiner's theory of augmented directed complexes.
+\end{frame}
+
+\begin{frame}{A 1-loop of 2-faces in the 5-simplex}
+	\pause
+	Consider $p_1,\dots,p_6 \in \R^5$
+	\[
+	\begin{pmatrix}
+		-3 \\
+		-1 \\
+		-1 \\
+		0 \\
+		1
+	\end{pmatrix}
+	\begin{pmatrix}
+		-2 \\
+		1 \\
+		1 \\
+		0 \\
+		1
+	\end{pmatrix}
+	\begin{pmatrix}
+		-1 \\
+		0 \\
+		0 \\
+		1 \\
+		1
+	\end{pmatrix}
+	\begin{pmatrix}
+		1 \\
+		0 \\
+		0 \\
+		1 \\
+		0
+	\end{pmatrix}
+	\begin{pmatrix}
+		2 \\
+		1 \\
+		-1 \\
+		0 \\
+		0
+	\end{pmatrix}
+	\begin{pmatrix}
+		3 \\
+		-1 \\
+		1 \\
+		0 \\
+		0
+	\end{pmatrix}
+	\]
+	They form a $5$-simplex $P$ and the canonical frame is $P$-admissible.
+
+	\pause\medskip
+
+	\resizebox{\linewidth}{!}{
+		\begin{tikzpicture}[auto, node distance=2cm, >=latex',
+			point/.style = {draw, circle, fill = black, inner sep = 1pt}]
+
+			\coordinate (a) at (-3,-1);
+			\coordinate (b) at (-2,1);
+			\coordinate (c) at (-1,0);
+			\coordinate (d) at (1,0);
+			\coordinate (e) at (2,1);
+			\coordinate (f) at (3,-1);
+
+			\draw[thick] (c) -- (f) -- (b) -- (d);
+			\draw[line width = 3pt,white] (d) -- (a) -- (e) -- (c);
+			\draw[thick] (d) -- (a) -- (e) -- (c);
+			\draw[thick] (a) -- (b) -- (c) -- (a);
+			\draw[thick] (d) -- (e) -- (f) -- (d);
+
+			\foreach \i/\l in {a/p_1,b/p_2,c/p_3,d/p_4,e/p_5,f/p_6}
+			{
+				\node[point,label={above:$\l$}] at (\i) {};
+			}
+
+			\draw[->] (4,0)-- (4,1);
+			\draw[->] (4,0)-- (5,0);
+			\node[] at (5.5, 0) {$e_1$};
+			\node[] at (4.5, 1) {$e_2$};
+	\end{tikzpicture}}
+
+\end{frame}
+
+\begin{frame}{How common are loops?}
+	\pause
+	A \colorit{Gaussian $n$-simplex} as the convex hull of $n+1$ independent random points in~$\R^n$ each chosen according to a $n$-dim'l std. normal distribution.
+
+	\pause\medskip
+	\colorit{Theorem (AML)} The probability that a canonically framed Gaussian $n$-simplex has a loop tends to~$1$ as~$n$ tends to~$\infty$.
+
+	\pause\medskip
+	\colorit{Slogan} Loop-free framed polytopes are special.
+\end{frame}
+
+\begin{frame}{The cyclic $n$-simplex}
+	\pause
+	Is the convex closure of
+	\[
+	\set[\big]{(t,t^2,\dots,t^n) \mid t \in \{0,\dots,n-1\}}.
+	\]
+
+	\pause
+	\colorit{Theorem}
+
+	\smallskip
+	With the canonical frame $\{e_1,e_2,\dots\}$ the cyclic simplex is loop free.
+
+	\pause\smallskip
+	Additionally, with $\{e_1,-e_2,e_3,-e_4,\dots\}$ it exactly recovers Street's pasting diagrams.
+\end{frame}
+
+\begin{frame}{Summary}
+	\pause
+	\begin{enumerate}
+		\item\pause Framed and oriented polytopes.
+		\item\pause The moduli of frames over an orientation can be wild.
+		\item\pause Kapranov-Voevodsky conjecture (KVC):
+
+		\smallskip
+		Framed $n$-polytopes define $n$-categorical pasting diagrams.
+
+		\item\pause Main example:
+
+		\smallskip
+		Cyclic $n$-simplex defines Street's pasting diagrams.
+
+		\item\pause KVC is equivalent to loop-freeness.
+
+		\item\pause First counterexample: a 1-loop of 2-faces in a 5-simplex.
+
+		\item\pause Loop-freeness is vanishingly rare (in a precise sense).
+
+		\item\pause Future work:
+
+		\smallskip
+		Flags of oriented matroids instead of framed polytopes.
+	\end{enumerate}
+\end{frame}
+
+%\begin{frame}{Oriented posets}
+%	\pause
+%	Let $(\Gamma, \leq)$ be a poset and $z \in \Gamma$.
+%	The \colorit{cover set} of $z$:
+%	\[
+%	\cov(z) = \set{x < z \mid \nexists y,\ x < y < z}.
+%	\]
+%
+%	\pause
+%	An \colorit{orientation} is a partition $\so(z) \sqcup \ta(z) = \cov(z)$ for each $z \in P$.
+%
+%	\pause\bigskip
+%	\colorit{Construction} An orientation $\omega$ of $P$ induces an orientation on $\faces(P)$.
+%
+%	\pause
+%	\[
+%	\text{Facet } E \leq F \text{ in } \ta(F) \qquad iff \qquad \omega_F \sim (\normal_E^F \wedge \, \omega_E).
+%	\]
+%
+%	\pause\bigskip
+%	\colorit{Ambiguity} This orientation on $\faces(P)$ determines $\omega$ up to
+%	\[
+%	\forall F,\ \omega_F \mapsto - \omega_F.
+%	\]
+%\end{frame}
+%
+%\begin{frame}{Refinement systems}
+%	\pause
+%	A \colorit{poset refinement system} is a collection $\set{\leq_i}$ of poset relations on $X$~s.t.
+%	\[
+%	\id \colon (X, \leq_i) \to (X, \leq_j)
+%	\]
+%	is order-preserving for $i \leq j$.
+%
+%	\pause\medskip
+%	\colorit{Construction} If $P$ is framed then $\faces(P)$ has a poset refinement system.
+%
+%	\pause
+%	\[
+%	F \leq_k G \qquad iff \qquad \pi_k(F) \subseteq \pi_k(G)
+%	\]
+%
+%	\pause\smallskip
+%	Each poset $(\faces(P), \leq_k)$ has a canonical orientation induced by the frame.
+%	\[
+%	\pi_k(F),
+%	\]
+%
+%	\pause\medskip
+%	For $F \in \faces(P)$ say $\dim f = m$, then $k$-source and $k$-target of $F \in \faces(P)$
+%	\[
+%	\so_k(F) = {}
+%	\]
+%
+%\end{frame}

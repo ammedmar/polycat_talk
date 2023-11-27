@@ -1,0 +1,48 @@
+% !TEX root = ../polycat.tex
+
+\tikzstyle{object} = [circle, fill, minimum size=2pt, inner sep=0pt, outer sep=0pt]
+
+\begin{tikzpicture}[scale=.7,auto, node distance=2cm,>=latex']
+	\node[object] (0) {};
+	\node[object] (1) at (1,1) {};
+	\node[object] (2) at (3,1) {};
+	\node[object] (3) at (4,0) {};
+	\node[object] (4) at (5,0) {};
+	\node[object] (5) at (6.5,0) {};
+	\node[object] (6) at (8,1) {};
+	\node[object] (7) at (9,0) {};
+
+	\draw[->]
+	(0) edge (1)
+	(1) edge (2)
+	(2) edge (3)
+	(3) edge (4);
+
+	\draw[->] (4) to[out=90,in=90] (5);
+	\draw[->] (4) to[out=-90,in=-90] (5);
+
+	\draw[->]
+	(5) edge (6)
+	(6) edge (7)
+	(5) edge (7);
+
+	\node[object] (21) at (1,-1) {};
+	\node[object] (22) at (3,-1) {};
+
+	\draw[->]
+	(0) edge (21)
+	(21) edge (22)
+	(22) edge (3);
+
+	\node[object] (8) at (2,0) {};
+	\draw[->]
+	(0) edge (8)
+	(8) edge (2)
+	(8) edge (22);
+
+	\node at (1.5,.5){$\Downarrow$};
+	\node at (1.5,-.5){$\Downarrow$};
+	\node at (3,0){$\Downarrow$};
+	\node at (5.8,0){$\Downarrow$};
+	\node at (8,.4){$\Downarrow$};
+\end{tikzpicture}

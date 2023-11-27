@@ -1,6 +1,100 @@
-%!TEX root = ../tqft.tex
+%!TEX root = ../polycat.tex
 
 \newcommand{\colorit}[1]{\textcolor{pblue}{#1}}
 \newcommand{\Bord}{\mathrm{Bord}}
 \newcommand{\Vect}{\mathrm{Vect}}
 \newcommand{\CC}{\mathbb{C}}
+
+% From the paper
+
+\DeclareMathOperator{\cov}{cov}
+
+\usepackage{todo}
+\def\todoname{Comments, remarks and to-do's}
+\usepackage{csquotes}
+\usetikzlibrary{arrows}
+\usepackage{xargs}%Allows to define newcommands with several optional arguments with \newcommandx
+\usepackage{comment}
+
+\usepackage{tikz,tikz-cd,tikz-3dplot}
+\usetikzlibrary{positioning,calc}
+
+\renewcommand{\corollary}{\noindent\textit{Corollary}.\ }
+\renewcommand{\theorem}{\noindent\textit{Theorem}.\ }
+\renewcommand{\lemma}{\noindent\textit{Lemma}.\ }
+\renewcommand{\proposition}{\noindent\textit{Proposition}.\ }
+
+
+\newcommand{\faces}{\Gamma}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\normal}{n}
+\newcommand{\CP}{C}
+\newcommand{\NC}{\cN}
+\DeclareMathOperator{\Mor}{Mor}
+\renewcommand{\bd}{\partial}
+\newcommand{\oriental}{\cO}
+\renewcommand{\face}{\operatorname{Face}}
+\DeclareMathOperator{\cone}{Cone}
+\DeclareMathOperator{\aug}{aug}
+\newcommand{\wCat}{\omega\Cat}
+\newcommand{\wDiag}{\omega\mathsf{Diag}}
+\newcommand{\cells}{\nu}
+
+%polytopes and polyhedra
+\DeclareMathOperator{\conv}{conv} %convex hull
+
+% source and target
+\DeclareMathOperator{\so}{s} % source set
+\DeclareMathOperator{\ta}{t} % target set
+
+% alphabetically:
+\renewcommand{\anibal}[1]{\todo[An.\!]{#1}}
+\newcommand{\arnau}[1]{\todo[Ar.\!]{#1}}
+\newcommand{\guillaume}[1]{\todo[G.\!]{#1}}
+
+\renewcommand{\chains}{\gchains}
+
+\newcommand{\sprod}[2]{\left\langle  #1 \, , \, #2  \right\rangle} % dot product
+
+% \newcommand{\defn}[1]{\textsl{\darkblue #1}} % emphasis of a definition
+\newcommand{\defn}[1]{\emph{#1}} % emphasis of a definition
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+		\left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+		#1 % the function
+		\vphantom{\big|} % pretend it's a little taller at normal size
+		\right|_{#2} % this is the delimiter
+}}%function restriction
+
+
+\newcommand{\bigslant}[2]{{\raisebox{.3em}{$#1$} \Big/ \raisebox{-.3em}{$#2$}}} % for big quotients
+
+
+\DeclareMathOperator{\GL}{GL}
+\newcommandx{\GLn}[1][1={\R^d}]{\GL(#1)} %General Linear group
+
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\Lin}{Lin}
+\newcommandx{\Affn}[1][1={\R^d}]{\Aff(#1)} %Affine General Linear group
+
+\newcommandx{\frames}[1][1=P]{\mathcal{F}_{#1}} %P-admissible frames
+
+\newcommandx{\ms}[1][1=B]{\mathcal{M}({#1})} %moduli space of a frame
+
+\newcommandx{\rs}[1][1=A]{\mathcal{R}({#1})} %realization space oriented matroid
+\newcommandx{\rsinf}[1][1={\chi}]{\mathcal{R}_\infty({#1})} %realization space oriented matroid with a point at infinity
+
+\newcommandx{\chiro}[1][1=A]{\chi^{#1}} %chirotope
+\newcommandx{\cyclift}[1][1=A]{{#1}^{\uparrow}} %cyclic lift
+
+
+\newcommand{\ball}[2]{B_{#2}(#1)} %Euclidean ball
+
+%arrow
+
+\newcommand{\thickmidarrow}{
+	\begin{tikzpicture}
+
+		\draw[ultra thick] (-2,1) -- (0,0) ;
+		\draw[ultra thick] (-2,-1) -- (0,0) ;
+\end{tikzpicture}}
